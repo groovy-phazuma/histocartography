@@ -11,7 +11,8 @@ import cv2
 import h5py
 import numpy as np
 from skimage.color.colorconv import rgb2hed
-from skimage.future import graph
+#from skimage.future import graph
+from skimage import graph
 from skimage.segmentation import slic
 
 from ..pipeline import PipelineStep
@@ -195,7 +196,7 @@ class SLICSuperpixelExtractor(SuperpixelExtractor):
             image,
             sigma=self.blur_kernel_size,
             n_segments=nr_superpixels,
-            max_iter=self.max_iterations,
+            max_num_iter=self.max_iterations,  # changed from 'max_iter'
             compactness=self.compactness,
             start_label=1,
         )
@@ -237,7 +238,7 @@ class MergedSuperpixelExtractor(SuperpixelExtractor):
             sigma=self.blur_kernel_size,
             n_segments=nr_superpixels,
             compactness=self.compactness,
-            max_iter=self.max_iterations,
+            max_num_iter=self.max_iterations,  # changed from 'max_iter'
             start_label=1,
         )
         return superpixels
